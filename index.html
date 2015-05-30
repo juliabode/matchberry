@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html ng-app="matchberry">
+<head>
+  <title>Matchberry</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body ng-controller="PageController as pageCtrl">
+    <header>
+        <div class="row">
+            <h1 class="column">matchberry</h1>
+        </div>
+        <div class="magic-line width-{{pageCtrl.step}}"></div>
+    </header>
+
+    <div class="row">
+        <div class="column card card--sign-up" ng-show="pageCtrl.step === 1">
+            <h3 class="question-number aligncenter">About You</h3>
+            <p class="first-name border">Julia</p>
+            <form>
+                <label for="age">Age: </label>
+                <select id="age">
+                    <option>20</option>
+                    <option>21</option>
+                </select>
+                <div class="cf">
+                    <p class="left">I am a ...</p>
+                    <div class="left">
+                        <input type="radio" name="type" id="jobseeker">
+                        <label for="jobseeker">jobseeker</label>
+                    </div>
+                    <div class="left">
+                        <input type="radio" name="type" id="employee">
+                        <label for="employee">employee</label>
+                    </div>
+                </div>
+                <div class="cf">
+                    <button ng-click="pageCtrl.selectCard(2)">Continue</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div ng-controller="QuizController as quizCtrl">
+            <div class="column card card--question" ng-repeat="question in quizCtrl.question" ng-show="pageCtrl.step === question.number + 1">
+                <h3 class="question-number aligncenter">{{question.number}}/3</h3>
+                <p class="aligncenter">{{question.name}}</p>
+
+                <div class="question-answer aligncenter">
+                    <button class="red" ng-click="pageCtrl.selectCard(pageCtrl.step + 1)">No</button>
+                    <button ng-click="pageCtrl.selectCard(pageCtrl.step + 1)">Yes</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="column card card--question" ng-show="pageCtrl.step === 5">
+                <p class="aligncenter">Thanks for playing! :)</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
